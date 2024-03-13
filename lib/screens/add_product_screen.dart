@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
+import 'package:sbbwu_session14_sqlite/db/database_helper.dart';
 import 'package:sbbwu_session14_sqlite/models/product.dart';
 import 'package:sbbwu_session14_sqlite/screens/product_list_screen.dart';
 
@@ -70,7 +71,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             ),
             const Gap(16),
             ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   String title = titleC.text.trim();
 
                   if (title.isEmpty) {
@@ -94,7 +95,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
                   // Pass this object to database and save inside table
 
+                 int result = await DatabaseHelper.instance.saveProduct(product);
 
+                 if( result > 0 ){
+                   Fluttertoast.showToast(msg: 'Record Saved');
+                 }else{
+                   Fluttertoast.showToast(msg: 'Failed');
+                 }
 
                 },
                 child: const Text('Save')),

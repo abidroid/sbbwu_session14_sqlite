@@ -1,6 +1,6 @@
 
 
-const tableName = 'tbl_products';
+const tableProducts = 'tbl_products';
 const colId = 'id';
 const colTitle = 'title';
 const colBrand = 'brand';
