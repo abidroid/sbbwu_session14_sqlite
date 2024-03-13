@@ -74,7 +74,15 @@ class DatabaseHelper {
      list.add(product);
    }
 
-   await Future.delayed(const Duration(seconds: 3));
+   await Future.delayed(const Duration(seconds: 1));
    return list;
+  }
+
+  Future<int> deleteProduct( int productId ) async {
+
+    Database db = await instance.database;
+
+    int result = await db.rawDelete('DELETE FROM $tableProducts where id=?', [productId]);
+    return result;
   }
 }
