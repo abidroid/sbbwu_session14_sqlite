@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sbbwu_session14_sqlite/db/database_helper.dart';
 import 'package:sbbwu_session14_sqlite/models/product.dart';
+import 'package:sbbwu_session14_sqlite/screens/update_product_screen.dart';
 
 class ProductListScreen extends StatefulWidget {
   const ProductListScreen({super.key});
@@ -15,6 +16,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepOrange,
         title: const Text('Product List'),
       ),
 
@@ -35,7 +37,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     Product product = products[index];
 
                 return Card(
-
+                    color: Colors.amber,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -104,8 +106,20 @@ class _ProductListScreenState extends State<ProductListScreen> {
                               );
                             });
 
-                          }, icon:const Icon(Icons.delete)),
-                          IconButton(onPressed: (){}, icon:const Icon(Icons.edit)),
+                          }, icon:const Icon(Icons.delete, color: Colors.red,)),
+                          IconButton(onPressed: () async {
+
+                            bool updated = await Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                              return UpdateProductScreen(product: product);
+                            }));
+
+                            if( updated){
+                              setState(() {
+
+                              });
+                            }
+
+                          }, icon:const Icon(Icons.edit, color: Colors.blue,)),
 
                         ],)
                       ],

@@ -42,7 +42,7 @@ class DatabaseHelper {
     await db.execute('''Create TABLE $tableProducts (
                   $colId INTEGER PRIMARY KEY AUTOINCREMENT,
                   $colTitle TEXT,
-                  $colBrand TEXT UNIQUE,
+                  $colBrand TEXT,
                   $colPrice TEXT,
                   $colColor TEXT,
                   $colSize TEXT
@@ -85,4 +85,18 @@ class DatabaseHelper {
     int result = await db.rawDelete('DELETE FROM $tableProducts where id=?', [productId]);
     return result;
   }
+
+  Future<int> updateProduct( Product product ) async {
+    Database db = await instance.database;
+    int result = await db.update(tableProducts, product.toMap(), where: 'id=?', whereArgs: [product.id!]);
+    return result;
+  }
 }
+
+/*
+  id
+  title
+  price
+  date
+
+ */
